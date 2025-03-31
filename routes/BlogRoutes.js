@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { authenticateMiddleware } from "../auth/jwtManager.js";
-import { createBlogController } from "../blog/BlogController.js";
+import {
+  createBlogController,
+  fetchAllBlogsController,
+} from "../blog/BlogController.js";
 
 const router = Router();
 router.use(authenticateMiddleware);
@@ -10,5 +13,6 @@ router.use(authenticateMiddleware);
  */
 
 router.post("/create", createBlogController);
+router.get("/all", fetchAllBlogsController);
 
 export default router;
