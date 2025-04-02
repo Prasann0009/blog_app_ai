@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { connectToMongoDB } from "./connection.js";
 import AuthRouter from "./routes/AuthRoutes.js";
 import BlogRouter from "./routes/BlogRoutes.js";
+import CommentRouter from "./routes/CommentRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -18,6 +19,7 @@ connectToMongoDB();
 
 app.use("/auth", AuthRouter);
 app.use("/blog", BlogRouter);
+app.use("/comment", CommentRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome bro");
