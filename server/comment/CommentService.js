@@ -1,4 +1,5 @@
 import Blog from "../models/BlogModel.js";
+import User from "../models/UserModel.js";
 
 export async function addComment(comment, userId, postId) {
   const commentInstance = { text: comment, userId, createdAt: Date.now() };
@@ -24,14 +25,45 @@ export async function addComment(comment, userId, postId) {
 }
 
 export async function fetchAllCommentsbyPostId(postId) {
-  const { comments, _id: postId } = await Blog.findById(postId, {
-    comments: 1,
-    _id: 1,
-  });
-  const uniqueUserIds = new Set();
-  comments.forEach((comment) => {
-    uniqueUserIds.add(comments.userId);
-  });
+  try {
+    const { comments } = await Blog.findById(postId, {
+      comments: 1,
+    });
 
-  return comments;
+    const uniqueIdNameMap = new Map();
+
+    comments.forEach((comment) => {
+      uniqueIdNameMap.set(comment.userId.toString(), "");
+    });
+
+    const uniqueUserIds = uniqueIdNameMap.keys();
+
+    const users = await User.find(
+      { _id: { $in: [...uniqueUserIds] } },
+      { _id: 1, name: 1 }
+    );
+
+    users.forEach((user) => {
+      uniqueIdNameMap.set(user._id.toString(), user.name);
+    });
+
+    const commentsResponse = [];
+
+    comments.forEach((comment) => {
+      const commentResponse = {
+        comment: comment.text,
+        createdAt: comment.createdAt,
+        username: uniqueIdNameMap.get(comment.userId) ?? "Anonymous",
+      };
+      commentsResponse.push(commentResponse);
+    });
+    return {
+      message: "Comments fetched successfully",
+      comments: commentsResponse,
+    };
+  } catch (error) {
+    return {
+      message: error.message,
+    };
+  }
 }

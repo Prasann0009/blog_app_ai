@@ -1,11 +1,10 @@
-import { User } from "../models/UserModel.js";
+import User from "../models/UserModel.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "./jwtManager.js";
 import Token from "../models/TokenModel.js";
 
 export const saveUser = async ({ name, email, password, gender }) => {
   try {
-    console.log("inside saveUser");
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
     const hashedPassword = await bcrypt.hash(password, salt);
 

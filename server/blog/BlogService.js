@@ -1,5 +1,5 @@
 import Blog from "../models/BlogModel.js";
-import { User } from "../models/UserModel.js";
+import User from "../models/UserModel.js";
 
 export async function createBlogPost({ description, genre, userId }) {
   const blog = new Blog({
