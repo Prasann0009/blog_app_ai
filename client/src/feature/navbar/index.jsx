@@ -1,8 +1,11 @@
 import React from "react";
 import "./navbar.scss";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { isLoggedInSelector } from "../auth/authSelectors";
 
 const NavigationBar = () => {
+  const isUserLoggedIn = useSelector(isLoggedInSelector);
   return (
     <div className="navbar-container">
       <div className="left-container">
@@ -11,14 +14,16 @@ const NavigationBar = () => {
           alt="logo"
         />
       </div>
-      <div className="right-container">
-        <NavLink to="/signup" className="btn signup-btn">
-          Signup
-        </NavLink>
-        <NavLink to="/login" className="btn login-btn">
-          Login
-        </NavLink>
-      </div>
+      {!isUserLoggedIn && (
+        <div className="right-container">
+          <NavLink to="/signup" className="btn signup-btn">
+            Signup
+          </NavLink>
+          <NavLink to="/login" className="btn login-btn">
+            Login
+          </NavLink>
+        </div>
+      )}
     </div>
   );
 };

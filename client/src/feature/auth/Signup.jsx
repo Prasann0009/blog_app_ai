@@ -1,13 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./auth.scss";
+import Button from "../../components/button/Button.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { signupSelector } from "./authSelectors.js";
+import { signupMiddleware } from "./authMiddleware.js";
+import { ApiStatus } from "../../network/ApiStatus.js";
 
 const Signup = () => {
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
+  // const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const { errorMessage, apiStatus } = useSelector(signupSelector);
+  // console.log(signupInfo);
+
   const onSignup = async (e) => {
     e.preventDefault();
-
     const form = e.target;
+
     const formData = {
       name: form["name"].value,
       password: form["password"].value,
@@ -15,16 +26,19 @@ const Signup = () => {
       gender: form["gender"].value,
     };
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/auth/signup",
-        formData
-      );
-      console.log("Register success", response.data);
-    } catch (error) {
-      console.log("error", error.response);
-      setError(error.response.data.message ?? "Something went wrong");
-    }
+    dispatch(signupMiddleware(formData));
+
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:8080/auth/signup",
+    //     formData
+    //   );
+    //   console.log("Register success", response.data);
+    //   setLoading(false);
+    // } catch (error) {
+    //   console.log("error", error.response);
+    //   setError(error.response.data.message ?? "Something went wrong");
+    // }
   };
 
   return (
@@ -51,8 +65,8 @@ const Signup = () => {
             required
           />
         </div>
-        <button>Signup</button>
-        {error && <p className="error">{error}</p>}
+        <Button text="Signup" isLoading={apiStatus === ApiStatus.pending} />
+        {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
     </div>
   );
