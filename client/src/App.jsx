@@ -11,7 +11,7 @@ const PrivateRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index Component={Home} />
+        <Route path="/:genreId" Component={Home} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
