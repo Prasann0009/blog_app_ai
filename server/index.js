@@ -43,6 +43,10 @@ app.use("/blog", BlogRouter);
 app.use("/comment", CommentRouter);
 app.use("/genres", GenresRouter);
 
+app.get("/", (req, res) => {
+  res.send("WELCOME TO THE TRENDIES API!");
+});
+
 app.listen(PORT, () => {
   console.log(`app is listening at port http://localhost:${PORT}`);
 });
