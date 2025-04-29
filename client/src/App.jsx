@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Home from "./feature/Home";
+import Home from "./feature/home";
 import Login from "./feature/auth/login";
 import Signup from "./feature/auth/Signup";
 import NavigationBar from "./feature/navbar";

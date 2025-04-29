@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Modal, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../Home/blogsMiddleware.js";
+import { createPost } from "../home/blogsMiddleware.js";
 import { ApiStatus } from "../../network/ApiStatus.js";
-import { updatePostCreationStatus } from "../Home/blogsSlice.js";
+import { updatePostCreationStatus } from "../home/blogsSlice.js";
 
 export default function CreatePost() {
   const [isModalOpen, setIsModalOpen] = useState(false);
