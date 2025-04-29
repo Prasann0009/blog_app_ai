@@ -1,7 +1,7 @@
 // const baseUrl = "http://localhost:8080";
 
 // Prod base url
-const baseUrl = "https://blog-app-ai-8d7o.vercel.app/";
+const baseUrl = "https://blog-app-ai-8d7o.vercel.app";
 
 const Endpoints = {
   login: `${baseUrl}/auth/login`,
