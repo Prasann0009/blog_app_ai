@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.6.1",
     "antd": "^5.24.7",
     "axios": "^1.8.4",
+    "cors": "^2.8.5",
     "material-icons": "^1.13.14",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
