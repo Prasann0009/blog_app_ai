@@ -36,19 +36,29 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-connectToMongoDB();
+connectToMongoDB()
+  .then(() => {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection failed. Server not started.", err);
+    process.exit(1); // Exit process if DB connection fails
+  });
+
+app.get("/", (req, res) => {
+  res.send("WELCOME TO THE BLOG APP API!");
+});
 
 app.use("/auth", AuthRouter);
 app.use("/blog", BlogRouter);
 app.use("/comment", CommentRouter);
 app.use("/genres", GenresRouter);
 
-app.get("/", (req, res) => {
-  res.send("WELCOME TO THE TRENDIES API!");
-});
-
-app.listen(PORT, () => {
-  console.log(`app is listening at port http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`app is listening at port http://localhost:${PORT}`);
+// });
 
 // getSentiment();
