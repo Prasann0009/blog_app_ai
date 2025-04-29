@@ -27,7 +27,7 @@ export async function addCommentController(req, res) {
   });
 }
 
-export async function fetchAllCommentsController(req, res) {
+export async function getAllCommentsController(req, res) {
   const { postId } = req.query;
 
   if (!postId) {

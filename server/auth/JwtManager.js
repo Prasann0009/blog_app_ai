@@ -4,12 +4,14 @@ const { TokenExpiredError } = jwt;
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export function generateToken(user) {
-  return jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: "1Hour" });
+  return jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: "1Day" });
 }
 
 export async function authenticateMiddleware(req, res, next) {
-  const authHeaders = req.header("authorization");
-  const token = authHeaders && authHeaders.split(" ")[1];
+  const token = req.header("authorization");
+
+  // const authHeaders = req.header("authorization");
+  // const token = authHeaders && authHeaders.split(" ")[1];
 
   // if (!token) {
   //   return {

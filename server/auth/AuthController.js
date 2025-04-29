@@ -11,7 +11,7 @@ const EMAIL_REGEXP = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
 const PASSWORD_REGEXP = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-const validateName = (name) => name && name.length >= 6;
+const validateName = (name) => name && name.length >= 4;
 
 const validateEmail = (email) => EMAIL_REGEXP.test(email);
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Button from "../../components/button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSelector } from "./authSelectors";
-import { loginMiddleware } from "./authMiddleware";
-import { ApiStatus } from "../../network/ApiStatus";
+import { loginSelector } from "./authSelectors.js";
+import { loginMiddleware } from "./authMiddleware.js";
+import { ApiStatus } from "../../network/ApiStatus.js";
 
 const Login = () => {
   // const [loading, setLoading] = useState(false);

@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-const DATABASE_URL = process.env.DEV_DATABASE_URL;
+const DATABASE_URL = process.env.DEV_DATABASE_URL
+  ? process.env.DEV_DATABASE_URL
+  : process.env.PROD_DATABASE_URL;
 
 const MAX_DB_RETRY_CONNECTIONS = process.env.MAX_DB_RETRY_CONNECTIONS;
 

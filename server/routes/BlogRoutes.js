@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticateMiddleware } from "../auth/jwtManager.js";
+import { authenticateMiddleware } from "../auth/JwtManager.js";
 import {
   createBlogController,
   fetchAllBlogsController,

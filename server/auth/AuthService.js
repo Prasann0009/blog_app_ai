@@ -1,6 +1,6 @@
 import User from "../models/UserModel.js";
 import bcrypt from "bcryptjs";
-import { generateToken } from "./jwtManager.js";
+import { generateToken } from "./JwtManager.js";
 import Token from "../models/TokenModel.js";
 
 export const saveUser = async ({ name, email, password, gender }) => {

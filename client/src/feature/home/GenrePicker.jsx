@@ -1,55 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./styles/genres.scss";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { fetchPostsByGenreId } from "../Home/postMiddleware.js";
-
-const genres = [
-  {
-    id: "politics",
-    title: "Politics",
-  },
-  {
-    id: "technology",
-    title: "Technology",
-  },
-  {
-    id: "health",
-    title: "Health",
-  },
-  {
-    id: "travel",
-    title: "Travel",
-  },
-  {
-    id: "education",
-    title: "Education",
-  },
-  {
-    id: "finance",
-    title: "Finance",
-  },
-  {
-    id: "entertainment",
-    title: "Entertainment",
-  },
-  {
-    id: "sports",
-    title: "Sports",
-  },
-  {
-    id: "lifestyle",
-    title: "Lifestyle",
-  },
-  {
-    id: "science",
-    title: "Science",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPostsByGenreId } from "./blogsMiddleware.js";
 
 const GenrePicker = () => {
   const { genreId } = useParams();
   const dispatch = useDispatch();
+  const genres = useSelector((state) => state.genres.genres);
 
   useEffect(() => {
     dispatch(fetchPostsByGenreId(genreId));
@@ -60,7 +18,7 @@ const GenrePicker = () => {
       {genres.map((genre) => {
         return (
           <Link
-            to={`/${genre.id}`}
+            to={`/genres/${genre.id}`}
             className={`link ${genreId === genre.id && "active-genre"}`}
             key={genre.id}
           >

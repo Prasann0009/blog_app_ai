@@ -1,13 +1,14 @@
 import React from "react";
 import NavigationBar from "../navbar";
 import GenrePicker from "./GenrePicker";
+import BlogPosts from "./BlogPosts";
 
 const Home = () => {
   return (
     <div>
       <NavigationBar />
       <GenrePicker />
-      {/* <BlogList /> */}
+      <BlogPosts />
     </div>
   );
 };

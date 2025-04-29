@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { authenticateMiddleware } from "../auth/jwtManager.js";
+import { authenticateMiddleware } from "../auth/JwtManager.js";
 import {
   addCommentController,
-  fetchAllCommentsController,
+  getAllCommentsController,
 } from "../comment/CommentController.js";
 
 const router = Router();
@@ -12,5 +12,5 @@ router.use(authenticateMiddleware);
 router.post("/add", addCommentController);
 
 //fetch all comments of a post
-router.get("/all", fetchAllCommentsController);
+router.get("/all", getAllCommentsController);
 export default router;

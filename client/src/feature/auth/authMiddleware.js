@@ -5,15 +5,13 @@ import {
   mutateSignupState,
   updateLoginStatus,
 } from "./authSlice.js";
+import Endpoints from "../../network/endpoints.js";
 
 export const signupMiddleware = (formData) => {
   return async function (dispatch) {
     dispatch(mutateSignupState({ apiStatus: ApiStatus.pending }));
     try {
-      const response = await axios.post(
-        "http://localhost:8080/auth/signup",
-        formData
-      );
+      const response = await axios.post(Endpoints.signup, formData);
       dispatch(mutateSignupState({ apiStatus: ApiStatus.success }));
       console.log("Register success", response.data);
     } catch (error) {
@@ -32,10 +30,7 @@ export const loginMiddleware = (formData) => {
   return async function (dispatch) {
     dispatch(mutateLoginState({ apiStatus: ApiStatus.pending }));
     try {
-      const response = await axios.post(
-        "http://localhost:8080/auth/login",
-        formData
-      );
+      const response = await axios.post(Endpoints.login, formData);
       const token = response.data.token;
       localStorage.setItem("token", token);
       dispatch(mutateLoginState({ apiStatus: ApiStatus.success }));
